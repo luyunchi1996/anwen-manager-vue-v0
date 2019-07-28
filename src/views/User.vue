@@ -276,6 +276,7 @@ export default {
             email: this.userInfo.email,
             lawyerOfficeId: this.userInfo.lawyerOfficeId,
             workCardNumber: this.userInfo.workCardNumber,
+              officeName:this.userInfo.officeName,
             detailAddress: this.userInfo.detailAddress,
             school: this.userInfo.school,
             birth: this.userInfo.birth,

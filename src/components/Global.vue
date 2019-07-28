@@ -1,11 +1,25 @@
 <script type="text/javascript">
+  var urlMap= {
+      "http://icase360.com":{appid:"wxe8b809ec20dde1de"},
+      "http://www.anwenwen.com":{appid:"wx724c736ab2fec33c"},
+      "http://localhost:8080":{appid:"wx724c736ab2fec33c",serverOri:"http://icase360.com" },
+      "https://icase360.com":{appid:"wxe8b809ec20dde1de"},
+      "http://ytm.mynatapp.cc":{appid:"wx724c736ab2fec33c"},
+  }
+
+
+  var base =  location.origin;
+  var baseConfig = urlMap[base];
+  if(baseConfig.serverOri){
+      base = baseConfig.serverOri
+  }
+
 // const baseUrl = "http://icase360.com/api";
 // const callbackIp = "http://icase360.com";
 //const appid="wxe8b809ec20dde1de";
-const baseUrl = "http://www.anwenwen.com/api";
-const callbackIp = "http://www.anwenwen.com";
-const appid="wx724c736ab2fec33c";
-
+const baseUrl = base+"/api";
+const callbackIp = base;
+const appid=urlMap[base].appid;
 const caseTypeProgress ={
     "0":{
         "1":{name:"收案",style:"label_yellow"},

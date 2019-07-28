@@ -19,37 +19,46 @@
       </el-col>
       <el-col :span="3" :offset="1" class="create-btn"><button @click="dialogVisible = true">创建新案件</button></el-col>
     </el-row>
-    <el-row  class="content-head">
-      <el-col :span="20" :offset="2" class="content-header">
-        <ul>
-          <li class="first">委托人</li>
-          <li class="second">案由</li>
-          <li class="third">法院</li>
-          <li class="fouth"></li>
-          <li class="fifth">日期</li>
-        </ul>
-      </el-col>         
-    </el-row>
-     <el-row  class="content-body">
-      <el-col :span="20" :offset="2" class="col-content">
-          <ul v-for="item in caseList" :key="item.id" class="content-body" @click="getDetail(item.id)"> 
-            <li class="first" v-text="item.bailorName"></li>
-            <li class="second" v-text="item.reasonName"></li>
-            <li class="third" v-text="item.courtName"></li>
-            <li class="fouth" ><span v-for="(state,index) in item.caseState">{{state}}</span></li>
-            <li class="fifth" v-text="item.createTime">2018-10-22</li>
-          </ul>
 
-          <el-pagination v-if="maxPage!==0"
-            layout="prev, pager, next"
-            :total="maxPage*10"    @current-change="pageChange($event)" >
-          </el-pagination>
-      </el-col>      
-    </el-row>
+      <el-row class="content-warp">
+          <el-row  class="content-head">
+              <el-col :span="24" v-if="maxPage==0">
+                  <div class="no-case"></div>
+              </el-col>
+              <el-col :span="24" :offset="2" class="content-header" v-if="maxPage!==0">
+                  <ul>
+                      <li class="first">委托人</li>
+                      <li class="second">案由</li>
+                      <li class="third">法院</li>
+                      <li class="fouth"></li>
+                      <li class="fifth">日期</li>
+                  </ul>
+              </el-col>
+          </el-row>
+          <el-row  class="content-body">
+              <el-col :span="24" :offset="2" class="col-content">
+                  <ul v-for="item in caseList" :key="item.id" class="content-body" @click="getDetail(item.id)">
+                      <li class="first" v-text="item.bailorName"></li>
+                      <li class="second" v-text="item.reasonName"></li>
+                      <li class="third" v-text="item.courtName"></li>
+                      <li class="fouth" ><span v-for="(state,index) in item.caseState">{{state}}</span></li>
+                      <li class="fifth" v-text="item.createTime">2018-10-22</li>
+                  </ul>
+
+                  <el-pagination v-if="maxPage!==0"
+                                 layout="prev, pager, next"
+                                 :total="maxPage*10"    @current-change="pageChange($event)" >
+                  </el-pagination>
+              </el-col>
+          </el-row>
+      </el-row>
+
+
+
     <el-row>
       <el-col :span="24" class="divider"></el-col>
     </el-row>
-    <el-row class="footer"> 
+    <el-row class="footer">
         <el-col :span="12">
           <div id="caseLine" class="line-echart" :style="'height:300px;width:98%;'"></div>
         </el-col>
@@ -61,6 +70,8 @@
       title="创建新案件"
       width="80%"
       :visible.sync="dialogVisible"
+      :top="dialogTop"
+
       class="new-case">
       <el-row class="new-form">
         <el-col :span="8"><label for="">委托人：</label><input type="text"  v-model="newCase.userName"  name="userName" class="validate"><span>*</span></el-col>
@@ -140,6 +151,7 @@ export default {
     return {
       searchValue: "",
       dialogVisible: false,
+        dialogTop:"1vh",
       caseList: [],
       chartInfo: {},
       caseState: [],
@@ -472,6 +484,7 @@ export default {
             .then(({ data }) => {
             that.caseList = data.data
 
+
             that.maxPage = data.maxPage
             that.caseList.forEach(function(value, index) {
             let caseType = value.caseType;
@@ -677,9 +690,62 @@ export default {
         left: 482px;
 
     }
+    @media screen  and (max-width: 1366px){
+        .inputError:after{
+            left: 120px;
+        }
+        .inputSuccess:before{
+            left: 333px;
+        }
+        .inputError:before{
+            left: 333px;
+        }
+    }
 </style>
+<!--1366 media-->
+<style scoped lang="less">
+    .content-warp{
+         padding: 0 89px;
+    }
+    .case-manage .content-head ul{
+         padding-left: 0.42rem;
+    }
+    .case-manage .content-body ul.content-body{
+         padding: 20px 0;
+    }
+    @media screen  and (max-width: 1366px){
+        .case-manage{
+            width: 100%;
+            .search-box .el-input__inner{
+                border: 1px solid #29299a;
+            }
+
+            .serach {
+                margin-left: 1.67rem;
+
+            }
+
+            .el-icon-search:before {
+                font-size: 16px;
+                position: relative;
+                top: -2px;
+
+            }
+            .sequence {
+                li{
+                    font-size: 12px;
+                    padding-left: 13px;
+                }
+            }
+        }
+    }
+
+</style>
+
 <style lang="less">
 .case-manage {
+    /*width: 1366px;*/
+    margin: 0 auto;
   .body-head {
     background-color: #f6f6f8;
       .col-filter{
@@ -730,6 +796,7 @@ export default {
         padding-right: 0.15rem;
 
     }
+
   .search-box .el-input__inner {
     /*margin: 35px 0;*/
       margin-top: 0.22rem;
@@ -743,6 +810,7 @@ export default {
     padding-left: 0.13rem;
       width: 2.28rem;
   }
+
     .search-box .el-input__suffix{
         left: 1.86rem;
         top: 0.24rem;
@@ -768,18 +836,27 @@ export default {
       color: #ffffff;
     }
   }
+
+
   .content-head {
       .content-header{
-          margin-left: 0.42rem;
+          margin-left:0;
+          /*margin-left: 0.42rem;*/
           /*border-bottom: 1px solid #eee;*/
       }
+.no-case{
+    height: 607px;
 
+    background-image: url("../assets/images/bk_no_case.png");
+    background-size: 100% 100%;
+    margin: 12px;
+}
     ul {
       padding: 20px 0;
       margin: 0;
       /*border-bottom: 1px solid #eee;*/
         position: relative;
-        left: 0.47rem;
+        left: 0;
       li {
         list-style: none;
         display: inline-block;
@@ -789,22 +866,27 @@ export default {
       }
       .first {
           /*width: 1.4rem;*/
+
           padding-right: 0.68rem;
       }
       .second {
         /*width: 18%;*/
+
           padding: 0 1.14rem;
       }
       .third {
         /*width: 18%;*/
+
           padding: 0 0.96rem;
       }
       .fouth {
+
           width: 4.86rem;
           height: 2px;
         /*width: 32%;*/
       }
       .fifth {
+
           width: 0.78rem;
           padding-right: 0.23rem;
         /*width: 16%;*/
@@ -813,12 +895,16 @@ export default {
   }
   .content-body {
       .col-content{
-          margin-left: 0.42rem;
+          margin-left: 0;
       }
     ul:first-child{
         border-top: 1px solid #eee;
     }
-    ul.content-body {
+      ul.content-body:hover{
+          cursor: pointer;
+
+      }
+      ul.content-body {
       padding: 10px 0;
       margin: 0;
       border-bottom: 1px solid #eee;
@@ -911,7 +997,7 @@ export default {
     }
   }
   .divider {
-    height: 34px;
+    height: 24px;
     background-color: #eee;
   }
   .footer {
@@ -1083,5 +1169,194 @@ export default {
       }
     }
   }
+    @media screen  and (max-width: 1366px){
+
+
+        .search-box .el-input__inner{
+            font-size: 12px;
+        }
+        .el-icon-search:before{
+            font-size: 16px;
+            position: relative;
+            top:-2px;
+        }
+        .new-case  .el-dialog__body{
+            padding: 20px 20px;
+        }
+        .new-case .el-dialog__header .el-dialog__title{
+            font-size: 22px;
+            line-height: 16px;
+        }
+        .new-case .new-form label{
+            font-size: 16px;
+        }
+        .new-case .new-form input{
+           font-size: 16px;
+        }
+        .new-case .new-form select{
+            font-size: 16px;
+        }
+        .new-case .el-dialog__header{
+            padding-bottom: 20px;
+        }
+        .new-case .new-form{
+            margin-bottom: 25px;
+        }
+        .new-case .el-dialog__footer{
+            padding-bottom: 50px;
+        }
+        .create-btn button{
+            font-size: 12px;
+        }
+
+        .content-head {
+            .content-header{
+                margin-left: 0;
+            }
+            ul {
+                padding: 10px 0 ;
+                padding-left: 0 !important;
+                margin: 0;
+                /*border-bottom: 1px solid #eee;*/
+                position: relative;
+                left: 0rem;
+                li {
+                    list-style: none;
+                    display: inline-block;
+                    text-align: center;
+                    font-size: 14px;
+                    color: #626262;
+                }
+                .first {
+                    /*width: 1.4rem;*/
+                    width: 1.19rem;
+
+                    padding-right: 0rem;
+                }
+                .second {
+                    width: 1.26rem;
+                    /*width: 18%;*/
+
+                    padding: 0rem 0.1rem;
+                }
+                .third {
+                    width: 1.4rem;
+                    /*width: 18%;*/
+
+                    padding: 0rem 0.25rem;
+                }
+                .fouth {
+
+                    width:3.20rem;
+                    height: 2px;
+                    padding: 0 0.25rem;
+                    /*width: 32%;*/
+                }
+                .fifth {
+
+                    width: 1.01rem;
+                    padding:0 0.4rem;
+                    /*width: 16%;*/
+                }
+            }
+        }
+        .content-body {
+            .col-content{
+                margin-left: 0;
+            }
+            ul.content-body {
+                li {
+                    list-style: none;
+                    display: inline-block;
+                    text-align: center;
+                    font-size: 12px;
+                    color: #838485;
+                }
+                .first {
+                    width: 1.19rem;
+                    padding-right: 0rem;
+
+                }
+                .second {
+                    width: 1.26rem;
+                    padding: 0rem 0.1rem;
+                    text-align: left;
+
+
+                }
+                .third {
+                    width: 1.4rem;
+                    padding: 0rem 0.25rem;
+                    text-align: left;
+
+                }
+                .fouth {
+                    width: 3.20rem;
+                    min-height: 6px;
+                    text-align: left;
+
+                    padding: 0 0.25rem;
+
+                    span {
+                        display: inline-block;
+                        background-color: #2ca7e7;
+
+                        color: #fff;
+                        padding: 2px 5px;
+                        position: relative;
+                        margin-right: 0.18rem;
+                    }
+                    span:first-child:before{
+                        display: inline-block;
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        z-index: -1;
+                        border: 0px;
+
+
+                    }
+                    span:before{
+                        display: inline-block;
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        z-index: -1;
+
+                        border: 1px solid transparent;
+                        border-color: #2ca7e7  #2ca7e7  #2ca7e7 transparent;
+
+
+                        left: -0.12rem;
+                        border-width: 0.1rem 0.06rem;
+
+                    }
+                    span:after{
+                        right: -0.12rem;
+
+                        display: block;
+                        content: " ";
+                        position: absolute;
+                        top: 0;
+                        z-index: -1;
+                        border: 1px solid transparent;
+                        border-left-color: #2ca7e7;
+                        border-width: 0.1rem 0.06rem;
+                    }
+                    span:before{
+
+                    }
+
+                }
+                .fifth {
+                    width: 1.01rem;
+
+                    padding:0 0.4rem;
+                }
+            }
+        }
+
+    }
 }
 </style>
+

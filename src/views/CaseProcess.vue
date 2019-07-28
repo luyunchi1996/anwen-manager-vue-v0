@@ -9,13 +9,13 @@
 
     </el-row>
     <el-row  class="content-head">
-      <el-col :span="14" :offset="1">
+      <el-col :span="15" :offset="1" class="el-fixed">
           <h4><span class="title">任务</span> <span class="title-sm">(共{{processCount[0]}}个任务组，{{processCount[1]}}个任务)</span></h4>
       </el-col>    
 
     </el-row>
      <el-row  class="content-body">
-      <el-col :span="14" :offset="1">
+      <el-col :span="15" :offset="1" class="el-fixed">
             <div class="process" v-for="(process,index) in caseProcess">
                 <i class="icon-number" :class="'icon-'+process.index"></i>
               <h5>{{process.name}}</h5>
@@ -43,19 +43,19 @@
          <div class="warp">
          <h4>概览</h4>
          <ul class="case-detail">
-           <li><span>委托人：</span>
-                <span>{{caseDetail.userName}}</span></li>
-           <li><span>联系方式：</span>
-                <span>{{caseDetail.userTel}}</span></li>
-           <li><span>案由：</span>
-                <span>{{caseDetail.reasonName}}</span></li>
-           <li><span>受理法院：</span>
-               <span>{{caseDetail.courtName}}</span></li>
-           <li><span>案件类型：</span>
-               <span>{{caseDetail.caseType}}</span></li>
-           <li><span>诉讼地位：</span>
-               <span>{{caseDetail.bailorType}}</span></li>
-           <li><span>相对方：</span>
+           <li><span class="title">委托人</span>
+                <span class="content">{{caseDetail.userName}}</span></li>
+           <li><span class="title">联系方式</span>
+                <span class="content">{{caseDetail.userTel}}</span></li>
+           <li><span class="title">案由</span>
+                <span  class="content">{{caseDetail.reasonName}}</span></li>
+           <li><span  class="title">受理法院</span>
+               <span class="content">{{caseDetail.courtName}}</span></li>
+           <li><span class="title">案件类型</span>
+               <span class="content">{{caseDetail.caseType}}</span></li>
+           <li><span class="title">诉讼地位</span>
+               <span class="content">{{caseDetail.bailorType}}</span></li>
+           <li><span class="title">相对方</span>
                <ol class="parties" >
                    <!---->
                    <li   class="party" v-for="(party,idx) in caseDetail.counterParty" >
@@ -63,23 +63,23 @@
                    </li>
                </ol>
                <!--<span>{{caseDetail.counterParty}}</span></li>-->
-           <li><span>承办人：</span>
-               <span>{{caseDetail.agent}}</span></li>
-           <li><span>书记员：</span>
-                <span>{{caseDetail.courtClerk}}</span></li>
-           <li><span>对方代理人：</span>
-                <span>{{caseDetail.counterPartyLawyer}}</span></li>
-           <li><span>律师服务费：</span>
-                <span>{{caseDetail.serviceCharge}}</span></li>
-           <li><span>标的：</span>
-                <span>{{caseDetail.orderPrice}}</span></li>
-           <li><span>关联码：</span>
-               <span>{{caseDetail.verifyCode}}</span></li>
+           <li><span class="title">承办人</span>
+               <span class="content">{{caseDetail.agent}}</span></li>
+           <li><span class="title">书记员</span>
+                <span class="content">{{caseDetail.courtClerk}}</span></li>
+           <li><span class="title">对方代理人</span>
+                <span class="content">{{caseDetail.counterPartyLawyer}}</span></li>
+           <li><span class="title">律师服务费</span>
+                <span class="content">{{caseDetail.serviceCharge}}</span></li>
+           <li><span class="title">标的</span>
+                <span class="content">{{caseDetail.orderPrice}}</span></li>
+           <li><span class="title">关联码</span>
+               <span class="content">{{caseDetail.verifyCode}}</span></li>
          </ul>
          </div>
          <div class="warp">
            <h4>我的成员</h4>
-           <div>
+           <div class="case-team">
              <el-input
                      placeholder="输入律师姓名,按回车进行搜索"
                      suffix-icon="el-icon-search"
@@ -115,29 +115,23 @@
        </el-col>
      </el-row>
     <el-row>
-      <el-col :span="24" class="divider"></el-col>
+
     </el-row>
-    <!--<el-row class="footer"> -->
-        <!--<el-col :span="12">-->
-          <!--<div id="caseLine" class="line-echart" :style="'height:300px;width:98%;'"></div>-->
-        <!--</el-col>-->
-        <!--<el-col :span="12">-->
-          <!--<div id="casePie" class="pie-echart" :style="'height:300px;width:98%;'"></div>-->
-        <!--</el-col>-->
-    <!--</el-row>-->
+
 
     <el-dialog
       width="80%"
       :visible.sync="dialogVisible"
-      :class=" 'new-case '+dialogClass" @opened="dialogOpen" :close-on-click-modal="false" :close-on-press-escape="false" :show-close="false">
-      <h5  slot="title">
-        <span>{{processname}}</span><i>&gt;</i><span>{{pchildname}}</span></h5>
+      :class=" 'new-case '+dialogClass" @opened="dialogOpen" :close-on-click-modal="false" :close-on-press-escape="false" :show-close="false" :top="dialogTop">
+      <!--<span>{{processname}}</span><i>&gt;</i>-->
+        <h5  slot="title">
+        <span>{{pchildname}}</span></h5>
       <el-row class="type1">
           <div>
-              <label>办案时长:</label><input v-model="minute" type="text"/><span>分钟</span>
+              <label>办案时长 ( 数字 )</label><el-input  class="input_minute" v-model="minute" placeholder="请输入数字"></el-input><span>单位/分钟</span>
           </div>
           <div>
-              <label>备注:</label><textarea  v-model="remark" class="text-area"></textarea>
+              <label>备注</label><textarea  v-model="remark" class="text-area"></textarea>
           </div>
           <div class="file-upload " :class="fileSelectedForm">
               <div>
@@ -158,7 +152,7 @@
                   </div>
 
               <div class="file-list-warp" id ="flw">
-                  <ul class="file-list" >
+                  <ul class="file-list show-icon" >
                       <li class="empty-list empty-text1" v-if="fileListView.length===0">还没有需要上传的文件哦,点击 '选择文件' 进行上传</li>
                       <li class="empty-list empty-text2" v-if="fileListView.length===0">此过程还没有上传过文件,点击 '传输列表' 上传文件</li>
                       <li v-else v-for="(fl,idx) in fileListView">
@@ -170,7 +164,7 @@
                                   content="">
                                   <div>
                                     <img   @load="imgOnLoad($event,'')"  @error="imgError($event,'')" :src="fl.url"/>
-                                    <p  class="not-view">该文件不支持预览，你可以<a  @click="downFile(fl.url,fl.name)">点击此处</a> 查看</p>
+                                    <p  class="not-view">该文件不支持预览，你可以<a  @click="downFile(fl.url,fl.name)" style="color: #336fcf; cursor: pointer"> 点击此处</a> 查看</p>
                                   </div>
                                   <span  slot="reference" class="file-name" >
                                       <a>{{fl.name}}</a>
@@ -183,8 +177,10 @@
 
                           <span class="file-size">{{fl.formatSize}}</span>
                           <div class="progress"></div>
-                      <div class="menu"><i class="icon icon-del" @click="delFile(idx,fl.vfrom)" title="删除"></i></div>
+                          <div class="menu"><i class="icon icon-del" @click="delFile(idx,fl.vfrom)" title="删除"></i></div>
                       </li>
+                      <!---->
+
 
                       <li class="watch-li"></li>
 
@@ -195,19 +191,28 @@
 
       </el-row>
       <el-row class="type2">
-
+          <p>{{pchild.tips}}</p>
           <ul>
-              <li v-if="!pchild.templateMap">暂无摸版</li>
+              <li v-if="!pchild.templateMap">暂无模版</li>
               <li v-else-if="pchild.templateMap.length == 0">暂无模版</li>
-              <li v-else v-for="(template,key) in pchild.templateMap" >
-                  <span>{{key}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<a :href=template>下载</a>
+              <li  v-else v-for="(template,key) in pchild.templateMap" >
+                  <span class="content">{{key}}</span>&nbsp;&nbsp;<a class="link" :href=template></a>
               </li>
 
 
           </ul>
       </el-row>
       <el-row class="type3">
-          {{pchild.tips}}
+          <p>{{pchild.tips}}</p>
+          <ul>
+              <li v-if="!pchild.templateMap">暂无模版</li>
+              <li v-else-if="pchild.templateMap.length == 0">暂无模版</li>
+              <li  v-else v-for="(template,key) in pchild.templateMap" >
+                  <span class="content">{{key}}</span>&nbsp;&nbsp;<a class="link" :href=template></a>
+              </li>
+
+
+          </ul>
       </el-row>
       <el-row class="type4">
           <div class="file-upload " :class="fileSelectedForm">
@@ -229,7 +234,7 @@
               </div>
 
               <div class="file-list-warp" id ="flw">
-                  <ul class="file-list" >
+                  <ul class="file-list show-icon" >
                       <li class="empty-list empty-text1" v-if="fileListView.length===0">还没有需要上传的文件哦,点击 '选择文件' 进行上传</li>
                       <li class="empty-list empty-text2" v-if="fileListView.length===0">此过程还没有上传过文件</li>
                       <li v-else v-for="(fl,idx) in fileListView">
@@ -241,7 +246,7 @@
                                   content="">
                               <div>
                                   <img   @load="imgOnLoad($event,'')"  @error="imgError($event,'')"  :src="fl.url"/>
-                                  <p  class="not-view">该文件不支持预览，你可以<a  @click="downFile(fl.url,fl.name)">点击此处</a> 查看</p>
+                                  <p  class="not-view">该文件不支持预览，你可以<a  @click="downFile(fl.url,fl.name)" style="color: #336fcf; cursor: pointer">点击此处</a> 查看</p>
                               </div>
                               <span  slot="reference" class="file-name" >
                                       <a>{{fl.name}}</a>
@@ -283,6 +288,7 @@ export default {
   components: {},
   data() {
     return {
+        dialogTop:"2vh",
         fileListView:[],
         fileUpLoadList:{},
         fileRecordList:[],
@@ -736,8 +742,8 @@ export default {
               delete  file.formatSize;
               delete  file.icon;
               delete  file.url;
+              delete file.uid;
               that.fileSelectedCount--;
-
               var fd = new FormData();
               fd.append("file",file)
               fd.append("filePath","/src/"+userID)
@@ -819,7 +825,10 @@ export default {
           let count=0;
           for(let key in pchild.templateMap){
               if(pchild.templateMap[key]) {
-                  pchild.templateMap[key] = "http://icase360.com/" + pchild.templateMap[key]
+
+                  if(pchild.templateMap[key].indexOf( "http://icase360.com/")==-1)
+                    pchild.templateMap[key] = "http://icase360.com/" + pchild.templateMap[key]
+
               }else {
                   delete  pchild.templateMap[key];
                   count--;
@@ -1244,7 +1253,6 @@ export default {
         border: 1px solid #eee;
         border-radius: 10px;
         margin-top: 12px;
-        height: 450px;
         .el-input{
             width: 25%;
             padding: 12px 0px;
@@ -1290,12 +1298,15 @@ export default {
 
         }
         .file-list-warp{
-            height: 320px;
-            overflow: auto;
+
         }
+
         .file-list{
             min-height: 1px;
             position: relative;
+            height: 320px;
+            overflow: auto;
+
 
             li{
                 border-bottom:1px solid #ccc;
@@ -1353,7 +1364,64 @@ export default {
                 bottom: 8px;
             }
         }
+        .show-icon{
+            width: 100%;
+            height: 2.4rem;
+            overflow-x: hidden;
+            .empty-list{
+                top:0.97rem;
+            }
+            li{
+                float: left;
+                width: 11.5%;
+                height: 1.2rem;
+                padding: 0 0.06rem;
+                margin: 0 0.06rem;
+                margin-bottom:0.12rem;
+                border:0px;
+                :after{
+                    content: " ";
+                    display: block;
+                    clear: both;
+                }
+                .icon{
+                    width: 0.16rem;
+                    height: 0.16rem;
+                }
+                .icon-del{
+                    position: absolute;
+                    top: 0;
+                    left:0.89rem;
 
+                }
+
+                .icon_default{
+                     width: 0.38rem;
+                     height: 0.38rem;
+                    left: 0.28rem;
+                    top:0.18rem;
+                }
+                .file-name{
+                    width: 100%;
+                    top: 0.2rem;
+                    padding: 0;
+                }
+                .file-size{
+                    left: 0px;
+                    width: 100%;
+                    text-align: center;
+                    top: 0.9rem;
+                }
+            }
+
+            li:first-child{
+                 border-top: 0px;
+            }
+            .watch-li{
+                display: none;
+            }
+
+        }
 
         /*##icon##*/
         .icon{
@@ -1453,6 +1521,9 @@ export default {
 
         }
 
+    }
+    .checked{
+        margin-right: 0;
     }
     .is-checked{
         .el-checkbox__inner::after{
@@ -1618,7 +1689,7 @@ export default {
                   width: 27%;
               }
               .demo, .direction, .document{
-                  width: 15%;
+                  width: 10%;
                   text-align: center;
               }
             .demo:hover, .direction:hover, .document:hover{
@@ -1629,6 +1700,7 @@ export default {
               .time{
                   width: 25%;
                   text-align: right;
+                  float: right;
                   color: #a9aaaa;
               }
           }
@@ -1642,15 +1714,48 @@ export default {
         background-color: #fff;
         margin-left: 0.61rem;
         .warp{
+
            padding: 0 0.3rem;
+            h4{
+                color: #336fcf;
+                margin-bottom: 0px;
+
+            }
+            h4:after{
+                content: " ";
+                display: block;      width: 0.8rem;
+                position: relative;
+                top: 7px;
+                height: 2px;
+                background: linear-gradient(to right, #F29C22, #D0503A);
+            }
            .case-detail{
               padding: 0;
+               margin-top: 0.18rem;
               list-style: none;
               li{
                  margin-top: 0.12rem;
               }
-           }
+               .title{
+                   color: #626262;
+                   font-size: 16px;
+                   display: inline-block;
+                   width: 1rem;
+               }
+               .content{
+                   color: #a9aaaa;
+               }
 
+           }
+            .case-team{
+                margin-top: 0.12rem;
+                .first-text{
+                    color: #626262;
+                    display: block;
+                    margin-top: 0.12rem;
+                    padding-bottom: 0.12rem;
+                }
+            }
           .search-box .el-input__inner {
             margin: 0px 0;
             padding: 0;
@@ -1685,7 +1790,10 @@ export default {
 
             }
             .first .icon_no_img .icon_title{
-                 margin-left: 6px;
+                margin-right: 8px;
+                position: relative;
+                top: -11px;
+
             }
           .icon_no_img .icon_title{
                 display: block;
@@ -1827,12 +1935,25 @@ export default {
   .new-case {
     .el-dialog {
       border-radius: 20px;
+        width: 50% !important;
     }
     .el-dialog__header {
       background-color: #f8f7fa;
-      padding: 30px 0 30px 43px;
+      padding: 0;
+        padding-top: 0.12rem;
+        padding-bottom: 0.12rem;
+        padding-left: 0.20rem;
+        /*padding: 30px 0 30px 43px;*/
       border-top-left-radius: 20px;
       border-top-right-radius: 20px;
+
+        h5{
+            padding: 0;
+            margin: 0;
+            font-size: 20px;
+            font-weight: normal;
+            color: #626262;
+        }
       .el-dialog__title {
         font-size: 30px;
         color: #626262;
@@ -1846,6 +1967,7 @@ export default {
       text-align: right;
       margin-bottom: 30px;
       label {
+
         font-size: 24px;
         color: #626262;
         line-height: 50px;
@@ -1936,10 +2058,24 @@ export default {
 
 
       }
+      .el-dialog__body{
+          padding: 0.2rem 0.2rem;
+      }
       textarea{
            width: 99%;
            height: 120px;
+          border-radius: 10px;
+          border: 1px solid #eee;
           resize: none;
+      }
+      label{
+          font-size: 16px;
+          display: inline-block;
+          padding-right: 0.12rem;
+      }
+      .input_minute{
+        width: 10%;
+          margin-right: 12px;
       }
     .type2,.type3,.type4{
        display: none;
@@ -1949,9 +2085,50 @@ export default {
       .type1,.type3,.type4{
           display: none;
       }
+       p{
+           color: #626262;
+           font-size: 18px;
+       }
        ul{
            list-style: none;
            padding: 0;
+           padding: 24px;
+
+           border-radius: 10px;
+           background-color: #f7f7fa;
+           li{
+               padding-bottom: 10px;
+           }
+
+           .content{
+               display: inline-block;
+               width: 160px;
+               font-size: 16px;
+               color: black;
+               overflow: hidden;
+               text-overflow:ellipsis;
+               white-space:nowrap
+           }
+
+           .link:after{
+               content: "下载";
+               height: 21px;
+               font-size: 16px;
+               color: #FA8004;
+               display: inline-block;
+               margin-right: 6px;
+               position: relative;
+               top:-5px;
+           }
+           .link:before{
+               content: " ";
+               width: 21px;
+               height: 21px;
+               background-image: url("../assets/images/icon-down.png");
+               background-size: 100% 100%;
+               display: inline-block;
+               margin-right: 5px;
+           }
 
        }
        .dialog-footer{
@@ -1969,6 +2146,54 @@ export default {
               display: none;
           }
       }
+      ul{
+          list-style: none;
+          padding: 0;
+
+          padding: 24px;
+
+          border-radius: 10px;
+          background-color: #f7f7fa;
+          li{
+              padding-bottom: 10px;
+          }
+
+          .content{
+              display: inline-block;
+              width: 160px;
+              font-size: 16px;
+              color: black;
+              overflow: hidden;
+              text-overflow:ellipsis;
+              white-space:nowrap
+          }
+
+          .link:after{
+              content: "下载";
+              height: 21px;
+              font-size: 16px;
+              color: #FA8004;
+              display: inline-block;
+              margin-right: 6px;
+              position: relative;
+              top:-5px;
+          }
+          .link:before{
+              content: " ";
+              width: 21px;
+              height: 21px;
+              background-image: url("../assets/images/icon-down.png");
+              background-size: 100% 100%;
+              display: inline-block;
+              margin-right: 5px;
+          }
+
+      }
+      p{
+          color: #626262;
+          font-size: 18px;
+      }
+
   }
   .doc{
     .type1,.type2,.type3{
@@ -1981,4 +2206,92 @@ export default {
       }
   }
 }
+
+
+
+@media screen  and (max-width: 1366px){
+    .file-upload .el-input .el-input__inner{
+        font-size: 12px;
+    }
+}
+
+
+</style>
+<!--1366 media-->
+<style scoped lang="less">
+    @media screen  and (max-width: 1366px){
+        .case-process {
+            width: 1024px;
+            margin: 0 auto;
+            .content-head .title{
+                font-size: 18px;
+            }
+            .icon-number{
+                top:9px;
+            }
+            .content-body .process .process-detail{
+                padding-left: 5%;
+            }
+            .content-body .process .process-detail .name{
+                width: 32%;
+            }
+            .content-body .case-padding{
+                width: 3rem;
+            }
+            .content-body .process .process-detail .time{
+                line-height: 2.2;
+            }
+            .content-body .process .process-detail > span{
+                font-size: 12px;
+            }
+            .el-checkbox__input .el-checkbox__inner{
+                left: 0px;
+            }
+            .content-head .title-sm{
+                font-size: 14px;
+            }
+            .content-head .title:after{
+                width: 60px;
+            }
+            .case-process .content-body .process h5{
+                font-size: 14px;
+                margin-top: 10px;
+            }
+            .content-body .case-padding .warp .case-detail .title{
+                font-size: 14px;
+            }
+            .content-body .case-padding .warp .case-detail .content{
+                font-size: 12px;
+            }
+            .content-body .case-padding .warp h4{
+                font-size: 16px;
+            }
+            .content-body .case-padding .warp .case-teamers .teamer-search{
+                top:-57px;
+            }
+            .content-body .case-padding .warp .case-teamers .teamer-search li{
+                width: 218px;
+            }
+            .content-body .case-padding .warp .case-teamers .icon-add{
+                left: 67px;
+            }
+            .content-body .case-padding .warp .search-box .el-input__inner{
+                font-size: 12px;
+            }
+
+            .el-fixed{
+               margin-left: 0.12rem;
+          }
+        }
+        .file-upload .el-input{
+            width: 32%;
+        }
+        .case-process .btn-new{
+            left: 85px;
+        }
+        .case-process .create-btn .btn-sm{
+            width: 28%;
+        }
+
+    }
 </style>

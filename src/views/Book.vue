@@ -14,8 +14,7 @@
       <el-col :span="18"  class="list"> 
         <ul>
           <li v-for="item in bookList" :key="item.ids" @click="showTellBook(item,0)">
-            <!--<img :src="item.imageUrl" alt="">-->
-            <img src="../assets/images/test.jpg"/>
+            <img :src="item.imageUrl" alt="">
             <p v-text="item.name"></p>
           </li>
         </ul>
@@ -23,20 +22,23 @@
 
 
       <el-col :span="6"  class="list-history">
-        <h4>历史记录</h4>
+        <div class="history-title">
+          <h4>历史记录</h4>
+        </div>
+
        <ul>
-         <li>秦淮区法院 赵雪妍</li>
-         <li>秦淮区法院 赵雪妍</li>
-         <li>秦淮区法院 赵雪妍</li>
-         <li>秦淮区法院 赵雪妍</li>
-         <li>秦淮区法院 赵雪妍</li>
+         <!--<li>秦淮区法院 赵雪妍</li>-->
+         <!--<li>秦淮区法院 赵雪妍</li>-->
+         <!--<li>秦淮区法院 赵雪妍</li>-->
+         <!--<li>秦淮区法院 赵雪妍</li>-->
+         <!--<li>秦淮区法院 赵雪妍</li>-->
        </ul>
       </el-col>
     </el-row>
     <el-dialog
             width="80%"
             :visible.sync="dialogVisible"
-            class='new-case' @opened="dialogOpen">
+            class='new-case' @opened="dialogOpen"  :top="dialogTop">
 
            <div>
 
@@ -49,43 +51,41 @@
                      <span v-if="index%2==0">部门</span>
                      <span v-else="" >姓名</span>
                    </td>
-                   <!--<td class="col" colspan="1">姓名</td>-->
-
-                   <!--<td class="col"  colspan="2"> 部门</td>-->
-                   <!--<td class="col" colspan="1">姓名</td>-->
-                   <!--<td class="col" colspan="2"> 部门</td>-->
-                   <!--<td class="col" colspan="1">姓名</td>-->
-
-                   <!--<td class="col"  colspan="2"> 部门</td>-->
-                   <!--<td class="col" colspan="1">姓名</td>-->
-
-                   <!--<td class="col"  colspan="2"> 部门</td>-->
-                   <!--<td class="col" colspan="1">姓名</td>-->
-
-                   <!--<td class="col"  colspan="2"> 部门</td>-->
-                   <!--<td class="col" colspan="1">姓名</td>-->
 
                  </tr>
                </thead>
                <tbody>
+               <!--<div class="judge_pop">-->
+                 <!--<ul>-->
+                   <!--<li><span>姓名</span><span>:</span><span>c.name</span></li>-->
+                   <!--<li><span>固定电话</span><span>:</span><span>c.contactWay</span></li>-->
+                   <!--<li><span>移动电话</span><span>:</span><span>c.mobile</span></li>-->
+                   <!--<li><span>邮箱地址</span><span>:</span><span>c.email}}</span></li>-->
+                   <!--<li><span>单位名称</span><span>:</span><span>c.workUnit</span></li>-->
+                   <!--<li><span>单位地址</span><span>:</span><span>c.workAddress</span></li>-->
+
+                 <!--</ul>-->
+               <!--</div>-->
+
                <tr  v-for="(t,row) in tableResult">
-                 <td    :rowspan="c.row" col="0" class="col" :class="'col_'+col%3"  v-if="c!=0" v-for="(c,col) in t">
+                 <td    :rowspan="c.row" col="0" class="col" :class="'col_'+col%3"  v-if="c!=0" v-for="(c,col) in t" >
+
                    <el-popover class="active-table" v-if="(col+1)%3==0"
                    placement="right"
-                   trigger="hover"
+                               trigger="hover"
                    content="">
                    <div class="judge_pop">
                      <ul>
-                       <li><span>姓名</span><span>:</span><span>{{c.name}}</span></li>
-                       <li><span>固定电话</span><span>:</span><span>{{c.contactWay}}</span></li>
-                       <li><span>移动电话</span><span>:</span><span>{{c.mobile}}</span></li>
-                       <li><span>邮箱地址</span><span>:</span><span>{{c.email}}</span></li>
-                       <li><span>单位名称</span><span>:</span><span>{{c.workUnit}}</span></li>
-                       <li><span>单位地址</span><span>:</span><span>{{c.workAddress}}</span></li>
+                       <li><span class="title">姓名</span><span>:</span><span class="content">{{c.name}}</span></li>
+                       <li><span class="title">固定电话</span><span>:</span><span class="content">{{c.contactWay}}</span></li>
+                       <li><span class="title">移动电话</span><span>:</span><span class="content">{{c.mobile}}</span></li>
+                       <li><span class="title">邮箱地址</span><span>:</span><span class="content">{{c.email}}</span></li>
+                       <li><span class="title">单位名称</span><span>:</span><span class="content">{{c.workUnit}}</span></li>
+                       <li><span class="title">单位地址</span><span>:</span><span class="content">{{c.workAddress}}</span></li>
 
                      </ul>
                    </div>
-                   <span  slot="reference" > {{c.name}}</span>
+                   <span  slot="reference" @click="saveJudge($event,c)"> {{c.name}}</span>
 
                    </el-popover>
 
@@ -119,7 +119,7 @@ export default {
     return{
       searchValue:"",
       bookList:[],
-
+        dialogTop:"2vh",
       court:{},
         dialogVisible:false,
         tableCol:15,
@@ -135,10 +135,11 @@ export default {
   },
   mounted(){
     let baseUrl = this.GLOBAL.baseUrl;
+    let areaCode =  this.common.getCookie("areaCode")
      this.$http
       .get(baseUrl + "/order/getAddressBookCourt", {
         params: {
-         code:"3201",
+         code:areaCode,
          status:"1"
         }
       })
@@ -147,6 +148,9 @@ export default {
       });
   },
     methods:{
+        saveJudge(e,o){
+
+        },
         pageChange(e){
             this.showTellBook(this.court,e-1)
         },
@@ -368,17 +372,32 @@ export default {
 };
 </script>
 <style lang="less">
+  .list-history .history-title{
+      height:0.64rem;
+      background-color: #f0f0f0;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+  }
+  .el-dialog__body{
+    padding: 15px 20px;
+  }
+  .el-pagination{
+     text-align: center;
+    padding: 0.12rem 0;
+  }
   .col{
      color: #626262;
     text-align: center;
     font-size: 20px;
     padding: 2px;
+    padding-bottom: 0.12rem;
   }
 
   .col_0,.col_1,.col_2{
      width: 1.2rem;
      color: #838485;
      font-size: 14px;
+    padding-bottom: 0.02rem;
 
   }
   .col_0{
@@ -386,45 +405,48 @@ export default {
   }
 
 #book {
-  background-color: #f6f6f8;
+  /*background-color: #f6f6f8;*/
+  width: 1366px;
+  margin: 0 auto;
   .body-head {
-    padding-top: 50px;
-    padding-bottom: 35px;
+    padding-top: 30px;
+    padding-bottom: 21px;
   }
   .active-table{
-     background-color: aquamarine;
      cursor: pointer;
 
   }
   .content-head{
     .list{
-      padding-left: 5%;
+      padding-left: 47px;
       ul{
         padding: 0;
         margin: 0;
         li:hover{
            transform: scale(1.2);
            cursor: pointer;
+          border-radius: 10px;
         }
         li{
           list-style: none;
           display: inline-block;
-          width: 30%;
-          margin-right: 3%;
+          width: 31%;
+          margin-right: 1%;
           margin-bottom: 20px;
           background-color: #fff;
           vertical-align: top;
           text-align: center;
           img{
             width: 100%;
-            height: 168px;
-            border-top-right-radius: 0.25rem;
-            border-top-left-radius: 0.25rem;
+            height: 130px;
+            border-top-right-radius: 0.1rem;
+            border-top-left-radius: 0.1rem;
           }
           p{
-            font-size: 20px;
+            font-size: 16px;
             margin: 0;
             padding-top: 0.08rem;
+            padding-bottom: 0.08rem;
             padding-left: 0.12rem;
             text-align: left;
             color: #626262;
@@ -440,6 +462,7 @@ export default {
             position: absolute;
             right: 0;
             top: 0.1rem;
+            margin-right: 10px;
           }
 
         }
@@ -450,14 +473,14 @@ export default {
       /*padding-right: 5%;*/
       border: 1px solid #a9aaaa;
       border-radius:10px ;
-      width: 3.7rem;
-      height: 8.85rem;
-      padding: 0 0.3rem;
+      width: 3rem;
+      height: 7.6rem;
+      /*padding: 0 0.3rem;*/
       h4{
         font-size: 18px;
         font-weight: normal;
-        padding: 0;
-        padding-top: 0.12rem;
+        padding:0.3rem;
+        padding-top: 0.2rem;
         color:#626262;
         /*background-color: #E8EAEC;*/
 
@@ -501,10 +524,71 @@ export default {
       }
     }
   }
+  @media screen  and (max-width: 1366px){
+    .el-input__inner{
+      font-size: 12px;
+    }
+    .content-head .list ul li p{
+        font-size: 14px;
+    }
+    .content-head .list-history{
+      width: 2.52rem;
+    }
+    .content-head .list ul li{
+      width: 32%;
+    }
+    .content-head .list ul li p:after{
+      width: 0.18rem;
+      height: 0.18rem;
+    }
+    .content-head .list-history ul li{
+      font-size: 14px;
+    }
+    .content-head .list-history ul li:before{
+      width: 0.12rem;
+      height: 0.16rem;
+      margin-right: 0.08rem;
+    }
+  }
+
 }
 
+.judge_pop{
+   width: 1.8rem;
+   min-height: 1.8rem;
+}
 .judge_pop ul{
   padding: 0;
   list-style: none;
+  li{
+     padding: 0 0.06rem;
+  }
+  span{
+     padding: 0.06rem 0;
+  }
+  .title{
+    display: inline-block;
+    padding-right: 0;
+    width: 60px;
+  }
+  .content{
+     padding-left: 0.06rem;
+    color: #a9aaaa;
+  }
+
 }
+  .el-popper{
+    border-radius: 0.1rem;
+    color: #626262;
+  }
+
+</style>
+<!--1366 media-->
+<style scoped lang="less">
+  @media screen  and (max-width: 1366px){
+    #book {
+      width: 1024px;
+
+    }
+  }
 </style>

@@ -20,7 +20,7 @@
          </li>       
         </ul>
       </el-col>
-      <el-col :span="24" class="data"> 
+      <el-col :span="24" class="data" >
         <h4>法律关系</h4>
        <ul>
          <li v-for="item in caseB" :key="item.id" :params="item.params" :url="item.url" @click="selectUrl($event,item)" >
@@ -66,12 +66,12 @@ export default {
         var caseBObject = data.data.A1.icons;
         var caseCObject = data.data.A2.icons;
         for (const key in caseAObject) {
-
           if (caseAObject.hasOwnProperty(key)) {
             caseAObject[key].image = "http://icase360.com"+caseAObject[key].path+caseAObject[key].image
             const element = caseAObject[key];
             this.caseA.push(element)
           }
+
         }
         for (const key in caseBObject) {
           if (caseBObject.hasOwnProperty(key)) {
@@ -126,7 +126,7 @@ selectUrl(e,item){
      openNotice() {
         this.$notify({
           title: '提示',
-          message: '勾选你想查询的网站，点击搜索按钮',
+          message: '勾选要查询的网站，填写搜索的内容进行搜索',
           duration: 2000
         });
       }
@@ -181,25 +181,28 @@ selectUrl(e,item){
 
 
 #bigData {
-  background-color: #f6f6f8;
+    width: 1366px;
+    margin: 0 auto;
+  /*background-color: #f6f6f8;*/
   .body-head {
     padding-top: 0.33rem;
     padding-bottom: 0.34rem;
   }
-    .el-input{
-         width: 65%;
-    }
+
   .content-body{
     padding-bottom: 150px;
-    h4{
-      padding-left: 15%;
+      .data{
+           padding: 6px 0;
+      }
+      h4{
+        padding-left: 3%;
         color: #A9AAAA;
         font-size: 17px;
-        margin: 20px 0;
+        margin: 0;
       font-weight: normal;
     }
     ul{
-      padding: 0 15%;
+
         .accept:after{
             content: ' ';
             display: inline-block;
@@ -208,7 +211,7 @@ selectUrl(e,item){
             background-image: url("../assets/images/accept.png");
             background-size: 100% 100%;
             position:absolute;
-            bottom: 0.68rem;
+            bottom: 0.40rem;
             right: 0.64rem;
 
         }
@@ -223,21 +226,24 @@ selectUrl(e,item){
       li{
         list-style: none;
         display: inline-block;
+
         background-color: #fff;
-          height: 1.6rem;
+          height: 1.32rem;
           width: 1.93rem;
-        margin-right: 1%;
+        margin-right: 2%;
         vertical-align: top;
         text-align: center;
           position: relative;
+          border-radius: 10px;
         img{
           margin-top: 14%;
-            width: 0.64rem;
-            height: 0.64rem;
+            width: 0.6rem;
+            height: 0.6rem;
         }
         p{
           text-align: center;
           color: #626262;
+            font-size: 16px;
         }
       }
       li:nth-child(6){
@@ -245,5 +251,39 @@ selectUrl(e,item){
       }
     }
   }
+    @media screen  and (max-width: 1366px){
+        .el-input__inner{
+            font-size: 12px;
+        }
+        .content-body h4{
+          font-size: 16px;
+        }
+        .content-body ul li{
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        .content-body ul li img{
+            width: 0.6rem;
+            height: 0.6rem;
+        }
+        .content-body ul li p{
+            font-size: 14px;
+        }
+        .content-body ul .accept:after{
+            bottom: 0.4rem;
+            right: 0.3rem;
+        }
+    }
 }
+</style>
+<!--1366 media-->
+<style scoped lang="less">
+    @media screen  and (max-width: 1366px){
+        #bigData {
+            width: 1024px;
+
+        }
+    }
+
+
 </style>

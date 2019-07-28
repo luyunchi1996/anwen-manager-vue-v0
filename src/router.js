@@ -2,22 +2,33 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
+import main from  './views/main.vue'
 import DoLogin from  './views/DoLogin.vue'
 import CaseManage from './views/CaseManage.vue'
-
+import BaseDemo from './views/BaseDemo.vue'
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/login',
       name: '',
       component: Login
     },
       {
+          path: '/',
+          name: '',
+          component: main
+      },
+      {
         path:'/doLogin',
         name:'doLogin',
           component:DoLogin
+      },
+      {
+        path:'/baseDemo',
+          name:'baseDemo',
+          component:BaseDemo
       },
     {
       path: '/case',

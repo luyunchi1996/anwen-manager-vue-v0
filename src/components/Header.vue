@@ -1,8 +1,10 @@
 <template>
   <div class="header">
+
+
    <el-row class="box">
      <el-col :span="5"><div class="logo-box"><img src="../assets/images/logo.png" alt=""></div></el-col>
-     <el-col :span="13" style="width: auto;">
+     <el-col :span="13"  class="col_fixed">
          <el-menu :default-active="activeIndex" class="el-menu-header" mode="horizontal" @select="handleSelect" router>
             <el-menu-item index="/case/caseManage" @click="changeIcon(1)">
               <img v-show="icons.icon1" src="../assets/icons/case.png" alt="">
@@ -47,9 +49,6 @@
                    <span class="content">执业经验</span>
                    <span class="mark" v-text="exp+'年'"></span>
                </p>
-
-
-
            </div>
            <!--:src="headImg"-->
            <img class="head-img"  :src="headImg"  @error="imgError()" alt="">
@@ -114,6 +113,9 @@ export default {
     let baseUrl = this.GLOBAL.baseUrl;
     let userID = this.common.getCookie("userID")
       let lawyerId = this.common.getCookie("lawyerId");
+    var  that =this
+
+
 
       this.$http
       .get(baseUrl + "/findLawyerInfoByRegisterId", {
@@ -128,6 +130,8 @@ export default {
         this.exp = info.workAge;
         this.headImg = info.imageUrl;
         this.common.setCookie("lawyerName",info.lawyerName);
+          this.common.setCookie("areaCode",info.areaCode);
+
       });
   },
   methods: {
@@ -226,9 +230,14 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+
+
 <style scoped lang="less">
 .header {
-  height: 0.71rem;
+  height: 0.74rem;
+    margin: 0 auto;
+    /*width: 1366px;*/
+    border-bottom: 1px solid #e5e5e5;
     /*line-height: 0.26rem;*/
   .box {
     .el-menu-header .is-active {
@@ -276,9 +285,9 @@ export default {
   }
   .logo-box {
       padding-top: 0.26rem;
-    padding-left: 0.42rem;
+      padding-left: 0.42rem;
       padding-right: 1.2rem;
-      height: 0.25rem;
+      height: 0.21rem;
   }
   .logo-box img{
     height: 100%;
@@ -319,6 +328,7 @@ export default {
       .user-info-warp{
           position: absolute;
           top: 14px;
+          left: 89px;
       }
       .user-info-warp .warp{
            padding-left: 0.21rem;
@@ -371,4 +381,57 @@ export default {
     }
   }
 }
+
+
+</style>
+<!--1366 media-->
+<style scoped lang="less">
+    @media screen  and (max-width: 1366px){
+
+
+        .header{
+
+            .logo-box{
+                height: 0.16rem;
+            }
+            .head-user-info{
+                left: 116px;
+                .content{
+                    font-size: 12px;
+                }
+
+                .mark{
+                    font-size: 12px;
+                }
+                .user-info-warp .warp{
+                    padding-left: 0.15rem;
+                }
+            }
+            .box{
+                .el-menu-item{
+                    padding-left: 0.12rem;
+                    padding-right: 0.14rem;
+                }
+                .col_fixed{
+                    width: auto;
+                }
+                .el-menu-header {
+                    li {
+                       font-size: 12px;
+                    }
+                }
+            }
+
+            ul {
+                padding-left: 0;
+                margin-right: 0.12rem;
+                li {
+                   img{
+                       max-width: 20px;
+                   }
+                }
+            }
+        }
+    }
+
 </style>

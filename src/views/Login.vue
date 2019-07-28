@@ -6,11 +6,11 @@
       </el-col>
       <el-col :span="24" class="btn-login">
         <div class="btn-box">
-           <button class="btn-reg">注册</button>
-          <button class="btn-log"  @click="dialogVisible = true">登录</button>
-        </div>       
-      </el-col>
-    </el-row>
+           <button class="btn-reg" @click="clickDo('register')">注册</button>
+    <button class="btn-log"  @click="clickDo('login')">登录</button>
+  </div>
+  </el-col>
+  </el-row>
     <el-row class="login-footer">
       <el-col :span="10" :offset="2">
         <el-col :span="8" :offset="4">
@@ -28,6 +28,18 @@
         <p><a href="http://www.miitbeian.gov.cn">苏ICP备17060514号-1</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32050802010594">苏公网安备32050802010594号</a></p>
       </el-col>
     </el-row>
+
+    <el-dialog
+               title="注册"
+               width="300px"
+               :visible.sync="registerDialog"  :show-close="false"
+               class="login-dia wxlogin-dialog">
+      <div class="wx-register">
+           <img src="../assets/images/xiaocase.jpg"/>
+           <p>请使用微信扫描二维码联系管理员,进行注册</p>
+      </div>
+
+    </el-dialog>
     <el-dialog v-if="isDev"
       title="登录"
       width="30%"
@@ -40,9 +52,11 @@
         <el-button type="primary" @click="login">确 定</el-button>
       </span>
     </el-dialog>
+
+
     <el-dialog v-else="isDev"
                title=""
-               width="16%"
+               width="300px"
                :visible.sync="dialogVisible"  :show-close="false"
                class="login-dia wxlogin-dialog">
 
@@ -73,6 +87,7 @@ export default {
   data() {
     return {
       dialogVisible: false,
+        registerDialog:false,
       tellPhone: "13801582831",
       isDev:false,
         wxLoginInfo:{
@@ -94,6 +109,21 @@ export default {
 
         },
   methods: {
+      clickDo(clickType){
+
+         switch (clickType){
+             case 'register':
+                 this.registerDialog=true
+
+
+                 break;
+             case 'login':
+                 this.dialogVisible=true
+                 break;
+             default:
+                 break;
+         }
+   },
     login() {
       let baseUrl = this.GLOBAL.baseUrl;
       let userPhone = this.tellPhone;
@@ -139,6 +169,14 @@ export default {
     .el-dialog__body{
        padding: 0;
     }
+    .wx-register{
+       padding: 10px;
+       img{
+         width: 280px;
+         height: 280px;
+       }
+    }
+
   }
 #login {
   .login {
