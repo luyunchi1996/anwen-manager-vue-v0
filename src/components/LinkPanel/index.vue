@@ -3,7 +3,7 @@
         <div class="row">
             <div  class="col-label">{{label}}</div>
             <div  class="col-content">
-                <a v-for="(li) in link"  @click="handlerClick(li.href)" >{{li.name}}</a>
+                <a v-for="(li,index) in link"  @click="handlerClick(li.href)" > <img  class="icon"  @error="handleImgError($event,index)" :src="li.icon" />{{li.name}}</a>
             </div>
         </div>
 
@@ -11,16 +11,42 @@
 </template>
 
 <script>
+
     export default {
         name: "LinkPanel",
         props:{
             label:String,
             link:Array,
         },
+        computed:{
+
+        },
+        data(){
+             return {
+                  errorImg:require("../../assets/icons/network.png"),
+
+             }
+        },
         methods:{
             handlerClick(href){
                  window.open(href)
-            }
+            },
+            handleImgError(e,i){
+
+                this.link[i].icon=this.errorImg
+            },
+            getBase64Image(img) {
+              var canvas = document.createElement("canvas");
+              canvas.width = 18;
+              canvas.height = 18;
+              var ctx = canvas.getContext("2d");
+              ctx.drawImage(img, 0, 0, 18, 18);
+              var dataURL = canvas.toDataURL("image/png");
+              debugger
+              return dataURL
+               // return dataURL.replace("data:image/png;base64,", "");
+           },
+
         }
     }
 </script>
@@ -30,8 +56,13 @@
          padding: 16px 12px;
         background-color: white;
         display: flex;
-        width: 944px;
+        width: 990px;
 
+    }
+    .icon{
+        width: 18px;
+        height: 18px;
+        padding-right: 6px;
     }
     .col-content{
          display: flex;
@@ -43,6 +74,7 @@
         text-align: center;
         width: 80px;
         height: 40px;
+        padding-right: 32px;
         font-weight: bold;
     }
     .col-content a{
@@ -55,7 +87,7 @@
     }
     .col-content a:hover{
         cursor: pointer;
-        transform: scale(1.2);
+        color: #3a8ee6;
 
     }
 </style>

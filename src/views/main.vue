@@ -24,139 +24,177 @@
         "司法数据":[
             {
                 name:"裁判文书网",
-                href:"http://wenshu.court.gov.cn/"
+                href:"http://wenshu.court.gov.cn/",
+                icon:"http://wenshu.court.gov.cn/favicon.ico"
             },
             {
                 name:"检察案件信息",
-                href:"http://www.ajxxgk.jcy.gov.cn/html/index.html"
+                href:"http://www.ajxxgk.jcy.gov.cn/html/index.html",
+                icon:"http://www.ajxxgk.jcy.gov.cn/favicon.ico"
             },
             {
                 name:"无讼案例",
-                href:"https://www.itslaw.com/bj"
+                href:"https://www.itslaw.com/bj",
+                icon:"https://www.itslaw.com/favicon.ico",
             },
             {
                 name:"威科先行",
-                href:"https://law.wkinfo.com.cn/"
+                href:"https://law.wkinfo.com.cn/",
+                icon:"https://law.wkinfo.com.cn/favicon.ico"
             },
             {
                 name:"OpenLaw",
-                href:"http://openlaw.cn/"
+                href:"http://openlaw.cn/",
+                icon:"http://openlaw.cn/favicon.ico"
             },
             {
                 name:"北大法宝",
-                href:"http://www.pkulaw.cn/"
+                href:"http://www.pkulaw.cn/",
+                icon:"http://www.pkulaw.cn/favicon.ico"
             },
         ],
         "商业调查":[
             {
                 name:"企业信用信息",
-                href:"http://www.gsxt.gov.cn/index.html"
+                href:"http://www.gsxt.gov.cn/index.html",
+                icon:"http://www.gsxt.gov.cn/favicon.ico"
             },
             {
                 name:"企查查",
-                href:"https://www.qichacha.com/"
+                href:"https://www.qichacha.com/",
+                icon:"https://www.qichacha.com/favicon.ico"
             },
             {
                 name:"天眼查",
-                href:"https://www.tianyancha.com/"
+                href:"https://www.tianyancha.com/",
+                icon:"https://www.tianyancha.com/favicon.ico"
             },
             {
                 name:"启信宝",
-                href:"https://www.qixin.com/"
+                href:"https://www.qixin.com/",
+                icon:"https://www.qixin.com/favicon.ico"
             },
             {
                 name:"巨潮资讯",
-                href:"http://www.cninfo.com.cn/new/index"
+                href:"http://www.cninfo.com.cn/new/index",
+                icon:"http://www.cninfo.com.cn/favicon.ico"
             },
             {
                 name:"香港公司查册",
-                href:"https://www.icris.cr.gov.hk/csci/"
+                href:"https://www.icris.cr.gov.hk/csci/",
+                icon:"https://www.icris.cr.gov.hk/favicon.ico"
             },
         ],
         "法律工具":[
             {
                 name:"赔偿金计算",
-                    href:"http://www.lawyouknow.com/product/gs.html#"
+                    href:"http://www.lawyouknow.com/product/gs.html#",
+                icon:"http://www.lawyouknow.com/favicon.ico"
             },
             {
                 name:"诉讼费计算",
-                    href:"https://www.cnado.com/"
+                    href:"https://www.cnado.com/",
+                icon:"https://www.cnado.com/favicon.ico"
             },
             {
                 name:"在线作图",
-                    href:"https://www.processon.com/"
+                    href:"https://www.processon.com/",
+                icon:"https://www.processon.com/favicon.ico"
             },
             {
                 name:"Alpha",
-                    href:"https://alphalawyer.cn"
+                    href:"https://alphalawyer.cn",
+                icon:"https://alphalawyer.cn/favicon.ico"
             },
             {
                 name:"元典",
-                    href:"https://legalmind.cn/lawyer/index"
+                    href:"https://legalmind.cn/lawyer/index",
+                icon:"https://legalmind.cn/favicon.ico"
             },
             {
                 name:"印象笔记",
-                    href:"https://www.yinxiang.com/"
+                    href:"https://www.yinxiang.com/",
+                icon:"https://www.yinxiang.com/favicon.ico"
             },
         ],
         "诉讼支持":[
             {
                 name:"失信查询",
-                href:"http://shixin.court.gov.cn/"
+                href:"http://shixin.court.gov.cn/",
+                icon:"http://shixin.court.gov.cn/favicon.ico"
             },
             {
                 name:"司法拍卖",
-                href:"https://sf.taobao.com/"
+                href:"https://sf.taobao.com/",
+                icon:"https://sf.taobao.com/favicon.ico"
             },
             {
                 name:"庭审公开",
-                href:"http://tingshen.court.gov.cn/"
+                href:"http://tingshen.court.gov.cn/",
+                icon:"http://tingshen.court.gov.cn/favicon.ico"
             },
             {
                 name:"诉讼保全",
-                href:"http://www.jsfbdb.com/"
+                href:"http://www.jsfbdb.com/",
+                icon:"http://www.jsfbdb.com/favicon.ico"
             },
             {
                 name:"诉讼融资",
-                href:"https://www.winhc.cn/"
+                href:"https://www.winhc.cn/",
+                icon:"https://www.winhc.cn/favicon.ico"
             },
             {
                 name:"中国仲裁网",
-                href:"http://www.china-arbitration.com/"
+                href:"http://www.china-arbitration.com/",
+                icon:"http://www.china-arbitration.com/favicon.ico"
             },
         ],
         "法律文件":[
             {
                 name:"荣大二郎神",
-                href:"http://www.elangshen.com/"
+                href:"http://www.elangshen.com/",
+                icon:"http://www.elangshen.com/favicon.ico"
             },
             {
                 name:"法天使",
-                href:"https://www.fatianshi.cn/"
+                href:"https://www.fatianshi.cn/",
+                icon:"https://www.fatianshi.cn/favicon.ico"
             },
             {
                 name:"合同范本",
-                href:"https://hk.lexiscn.com/"
+                href:"https://hk.lexiscn.com/",
+                icon:"https://hk.lexiscn.com/favicon.ico"
             },
             {
                 name:"法大大",
-                href:"https://www.fadada.com/"
+                href:"https://www.fadada.com/",
+                icon:"https://www.fadada.com/favicon.ico"
             },
             {
                 name:"律商",
-                href:"https://hk.lexiscn.com/"
+                href:"https://hk.lexiscn.com/",
+                icon:"https://hk.lexiscn.com/favicon.ico"
             },
             {
                 name:"悦合同",
-                href:"https://yuehetong.com/"
+                href:"https://yuehetong.com/",
+                icon:"https://yuehetong.com/favicon.ico"
             },
         ],
 
     }
     const searchLinks=[
-        {name:"必应",path:"https://cn.bing.com/",
+        {name:"百度",path:"https://www.baidu.com/",
             onSearch: (obj)=>{
-                return  obj.path+"search?q="+obj.value
+                return  obj.path+"s?wd="+obj.value
+            }
+        },
+        {name:"搜狗",path:"https://www.sogou.com/",onSearch: (obj)=>{
+                return  obj.path+"web?query="+obj.value
+            }},
+        {name:"360",path:"https://www.so.com/",
+            onSearch:(obj)=>{
+                return  obj.path+"s?q="+obj.value
             }
         },
         {name:"秘迹",path:"https://mijisou.com/",
@@ -164,27 +202,16 @@
                 return  obj.path+"?q="+obj.value
             }
         },
-        {name:"搜狗",path:"https://www.sogou.com/",onSearch: (obj)=>{
-               return  obj.path+"web?query="+obj.value
-            }
-        },
-        {name:"360",path:"https://www.so.com/",
-           onSearch:(obj)=>{
-              return  obj.path+"s?q="+obj.value
-           }
-        },
-
-        {name:"谷歌",path:"https://www.google.com/",
+        {name:"必应",path:"https://cn.bing.com/",
             onSearch: (obj)=>{
                 return  obj.path+"search?q="+obj.value
             }
         },
 
-        {name:"百度",path:"https://www.baidu.com/",
-            onSearch: (obj)=>{
-                return  obj.path+"s?wd="+obj.value
-            }
-        },
+
+
+
+
     ]
     export default {
         name: "main",
