@@ -9,18 +9,47 @@
                 <div  class="col-last col-link" @click="handlerLogin">登录</div>
             </el-col>
         </el-row>
+
+        <el-dialog
+                   title=""
+                   width="360px"
+                   height="400px"
+                   :visible.sync="dialogVisible"  :show-close="false"
+                   class="login-dia wxlogin-dialog">
+                <Login />
+            <!--<wxlogin :appid ="wxLoginInfo.appid" class="wxLogin"-->
+                     <!--:scope="wxLoginInfo.scope"-->
+                     <!--:redirect_uri="wxLoginInfo.redirect_uri"-->
+                     <!--:state	=" wxLoginInfo.state">-->
+
+            <!--</wxlogin>-->
+            <!--<el-col :span="8"><label for="">手机号：</label><input type="text" v-model="tellPhone"></el-col>-->
+            <!--<span slot="footer" class="dialog-footer">-->
+            <!--<el-button type="primary" @click="login">确 定</el-button>-->
+            <!--</span>-->
+        </el-dialog>
     </div>
 
 </template>
 
 <script>
     import router from "../../router";
+    import  Login from  "../login/Login"
 
     export default {
         name: "Header",
+        components:{
+            "Login":Login
+        },
+        data(){
+            return {
+                dialogVisible: false
+            }
+        },
         methods:{
             handlerLogin(){
-                 router.push("login");
+                this.dialogVisible = true;
+                 // router.push("login");
             }
         }
     }
@@ -56,7 +85,7 @@
     }
     .col-link:hover{
          cursor: pointer;
-         transform: scale(1.2);
+         color: #000000;
     }
 
 </style>

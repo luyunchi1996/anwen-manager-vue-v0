@@ -53,7 +53,7 @@
 
 <style scoped>
     .row{
-         padding: 16px 12px;
+         padding: 16px 40px;
         background-color: white;
         display: flex;
         width: 990px;

@@ -20,6 +20,8 @@
     import  Header from  "../components/header/Header"
     import  SearchLinks from  "../components/searchLinks/index"
     import  LinkPanel from  "../components/LinkPanel/index"
+
+
     const links={
         "司法数据":[
             {
@@ -40,12 +42,12 @@
             {
                 name:"威科先行",
                 href:"https://law.wkinfo.com.cn/",
-                icon:"https://law.wkinfo.com.cn/favicon.ico"
+                icon:"http://www.ajxxgk.jcy.gov.cn/favicon.ico"
             },
             {
                 name:"OpenLaw",
                 href:"http://openlaw.cn/",
-                icon:"http://openlaw.cn/favicon.ico"
+                icon:"http://www.ajxxgk.jcy.gov.cn/favicon.ico"
             },
             {
                 name:"北大法宝",
@@ -57,7 +59,7 @@
             {
                 name:"企业信用信息",
                 href:"http://www.gsxt.gov.cn/index.html",
-                icon:"http://www.gsxt.gov.cn/favicon.ico"
+                icon:"http://www.ajxxgk.jcy.gov.cn/favicon.ico"
             },
             {
                 name:"企查查",
@@ -77,12 +79,12 @@
             {
                 name:"巨潮资讯",
                 href:"http://www.cninfo.com.cn/new/index",
-                icon:"http://www.cninfo.com.cn/favicon.ico"
+                icon:"http://www.ajxxgk.jcy.gov.cn/favicon.ico"
             },
             {
                 name:"香港公司查册",
                 href:"https://www.icris.cr.gov.hk/csci/",
-                icon:"https://www.icris.cr.gov.hk/favicon.ico"
+                icon:"http://www.ajxxgk.jcy.gov.cn/favicon.ico"
             },
         ],
         "法律工具":[
@@ -94,7 +96,7 @@
             {
                 name:"诉讼费计算",
                     href:"https://www.cnado.com/",
-                icon:"https://www.cnado.com/favicon.ico"
+                icon:"http://www.ajxxgk.jcy.gov.cn/favicon.ico"
             },
             {
                 name:"在线作图",
@@ -131,12 +133,12 @@
             {
                 name:"庭审公开",
                 href:"http://tingshen.court.gov.cn/",
-                icon:"http://tingshen.court.gov.cn/favicon.ico"
+                icon:"http://www.ajxxgk.jcy.gov.cn/favicon.ico"
             },
             {
                 name:"诉讼保全",
                 href:"http://www.jsfbdb.com/",
-                icon:"http://www.jsfbdb.com/favicon.ico"
+                icon:"http://www.ajxxgk.jcy.gov.cn/favicon.ico"
             },
             {
                 name:"诉讼融资",
@@ -275,7 +277,7 @@
     .content{
          margin: 0 auto;
          margin-top: 32px;
-        width: 944px;
+        width: 1070px;
 
 
     }
