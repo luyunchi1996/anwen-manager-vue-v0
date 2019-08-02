@@ -1,11 +1,62 @@
 <template>
     <div class="box">
-        <Header/>
-        <h2 class="title">icase360.com</h2>
-        <SearchLinks :links="getSearchLinks"  />
-        <div class="content" :style="contentStyle" >
-        <LinkPanel   v-for="(link,index) in getGroupLinks"   :link="link" :label="index"  />
+        <Header class="header"  @handlerMenu="handlermenu"/>
+        <div :style="contentStyle" >
+            <h2 class="title">icase360.com</h2>
+            <SearchLinks :links="getSearchLinks"  />
+            <div class="content" >
+                <LinkPanel   v-for="(link,index) in getGroupLinks"   :link="link" :label="index"  />
+            </div>
         </div>
+        <div class="warps" v-if="changebtn" :style="newContentStyle">
+            <div class="warps-content">
+                <div class="warps-content-contents" :style="warpsContentContentStyle">
+                    <div class="warp-article" style="margin:0 24px;padding: 6px;position: relative;top: 12%;">
+                        <h3 style="margin-bottom: 58px;">智能法律顾问</h3>
+                        <div>
+                            <h3 style="font-size: 26px; color:#f78543; ">AI Counsel</h3>
+                            <p style="font-size: 28px;margin: 0;line-height: 1.2; color:#4c4c4c;">技术驱动常法创收</p>
+                            <p style="color:#6b6b6b;">Alpha，集律所管理、法律大数据和专业服务为一体的智能办案系统，
+                              将可视化、大数据和人工智能三大前沿技术融入每一个模块，提高律师专业判断的准确度，实时反馈团队成员的参与度，增强客户享受法律服务的满意度。</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="warps-content-footer">
+                    <ul>
+                        <li class="li1">
+                           <img src="../assets/images/xiaocase.jpg"/>
+                            <p>请扫描二维码咨询</p>
+                        </li>
+                        <li>
+                            <h4>提升效率</h4>
+                            <p>智能合同审查</p>
+                            <p>智能法律咨询</p>
+                            <p>智能合同管理</p>
+                            <p>...</p>
+                        </li>
+                        <li>
+                            <h4>提高报价</h4>
+                            <p>合同交易全流程风控</p>
+                            <p>劳动用工合规风控</p>
+                            <p>其他法律服务产品</p>
+                            <p>...</p>
+                        </li>
+                        <li>
+                            <h4>市场拓展</h4>
+                            <p>法制体检</p>
+                            <p>法律服务招投标信息</p>
+                            <p>活动推广指导</p>
+                            <p>市场人才培养计划</p>
+                        </li>
+                    </ul>
+                    <p class="subline"><span >iCase360&nbsp;</span>与众不同的...</p>
+
+                </div>
+            </div>
+
+        </div>
+
         <div class="footer">
             <p><span>© 苏州法智科技有限公司</span>&nbsp;&nbsp;<span>邮箱&nbsp;：icase360@163.com</span></p>
             <p><span>苏ICP备17060514号-1</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class="alink" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32050802010594">苏公网安备32050802010594号</a></p>
@@ -224,9 +275,19 @@
         },
         data(){
             return{
+               changebtn:false,
                contentStyle:{
-                   "min-height": "608px"
-               }
+                   "min-height": "800px"
+               },
+                warpsContentContentStyle:{
+                   "height":"610px"
+                },
+               newContentStyle:{
+                    "min-height":"830px",
+                    "top":-830+42+"px"
+               },
+                warpContentMaxTop:0,
+                warpMaxTop:1
             }
         },
         computed:{
@@ -239,28 +300,62 @@
         },
         mounted(){
             let that = this
-           window.onresize=()=>{
-                 that.contentStyle["min-height"] =`${window.innerHeight - 329}px`
-           }
 
-            this.contentStyle["min-height"] =`${window.innerHeight - 329}px`
+
+           window.onresize=()=>{
+               that.contentStyle["min-height"] =`${window.innerHeight - 166}px`
+               that.newContentStyle["min-height"] =`${window.innerHeight - 106}px`
+               let ccHeight = window.innerHeight - 106
+               this.warpsContentContentStyle["height"]=`${ccHeight - 220}px`
+               that.warpContentMaxTop= -(window.innerHeight - 106-42);
+               that.newContentStyle["top"] = `${ that.warpContentMaxTop}px`
+           }
+            this.newContentStyle["min-height"] =`${window.innerHeight - 106}px`;
+            let ccHeight = window.innerHeight - 106
+            this.warpsContentContentStyle["height"]=`${ccHeight - 220}px`
+            this.warpContentMaxTop= - (window.innerHeight - 106-42);
+            this.newContentStyle["top"] = `${ this.warpContentMaxTop}px`
+
+
+            this.contentStyle["min-height"] =`${window.innerHeight - 166}px`
 
         },
         methods:{
+            handlermenu(){
+                this.changebtn = !this.changebtn
+                let that = this;
+                if(this.changebtn){
+                    // this.warpStyle["newContentStyle"]="42px"
+                    for(let i =this.warpContentMaxTop;i<=42;i++){
+                        setTimeout(()=>{
+                            this.newContentStyle["top"] = `${i}px`
+                        },100)
+
+                    }
+
+                }else{
+                    this.warpContentMaxTop= - (window.innerHeight - 106-42);
+                    this.newContentStyle["top"] = `${ this.warpContentMaxTop}px`
+                }
+
+
+
+            }
 
         }
 
     }
-
-
-
-
 </script>
 
 <style scoped>
     .box{
         background-color: #efefef;
+        position: relative;
 
+    }
+    .header{
+        position: relative;
+        z-index: 100;
     }
     .alink{
         text-decoration: none;
@@ -274,10 +369,85 @@
         text-align: center;
         font-style: italic;
    }
+   .warps{
+       min-height: 830px;
+       width: 100%;
+       position: absolute;
+       top: 42px;
+       z-index: 90;
+       background-color: rgba(0,0,0,0.5);
+
+   }
+   .warps-content-contents{
+       height: 610px;
+       background-color:white;
+
+   }
+   .warps-content-contents .warp-article{
+        width: 580px;
+        height:480px;
+       font-size: 14px;
+       line-height: 2.2;
+   }
+   .warps-content-contents h3{
+       margin: 0;
+   }
+   .warps-content-footer{
+        height:220px;
+        background-color: #333333;
+        color:white;
+       font-size: 14px;
+   }
+    .warps-content-footer   .subline{
+        margin: 0;
+        line-height: 1.2;
+        text-align: center;
+
+    }
+    .warps-content-footer .subline span{
+         color:#e4a923;
+    }
+
+   .warps-content-footer ul{
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        align-items: center;
+   }
+    .warps-content-footer li{
+        min-width: 120px;
+        height:160px;
+        padding: 6px;
+        margin: 8px 24px;
+    }
+    .warps-content-footer li p{
+        margin: 12px 0;
+        line-height: 1.2;
+        color: #b9b9b9;
+    }
+    .warps-content-footer li h4{
+        margin:0;
+        line-height: 1.2;
+    }
+
+    .warps-content-footer .li1 img{
+         width: 120px;
+         height: 120px;
+    }
+    .warps-content-footer .li1 p{
+        text-align: center;
+        line-height: 1.2;
+        margin: 0;
+    }
+   .warps-content{
+        background-color: #efefef;
+
+   }
     .content{
          margin: 0 auto;
          margin-top: 32px;
-        width: 1070px;
+         width: 1070px;
 
 
     }

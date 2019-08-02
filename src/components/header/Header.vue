@@ -5,7 +5,7 @@
                 <div>法律人专属的导航</div>
             </el-col>
             <el-col :span="6" class="col-menu">
-                <div>智能助手</div><br/>
+                <div  class="col-link" @click="handlerMenu" >智能助手</div><br/>
                 <div  class="col-last col-link" @click="handlerLogin">登录</div>
             </el-col>
         </el-row>
@@ -47,6 +47,9 @@
             }
         },
         methods:{
+            handlerMenu(){
+              this.$emit("handlerMenu");
+            },
             handlerLogin(){
                 this.dialogVisible = true;
                  // router.push("login");
