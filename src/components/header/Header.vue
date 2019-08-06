@@ -2,11 +2,12 @@
     <div>
         <el-row class="boxs">
             <el-col :span="18" class="col-text">
-                <div>法律人专属的导航</div>
+                <div><span style="color:#e4a923;">iCase360.com</span> 法律人专属的导航</div>
             </el-col>
             <el-col :span="6" class="col-menu">
                 <div  class="col-link" @click="handlerMenu" >智能助手</div><br/>
                 <div  class="col-last col-link" @click="handlerLogin">登录</div>
+                <!--<div  class="col-last col-link" @click="SetHome(this,window.location)">设为主页</div>-->
             </el-col>
         </el-row>
 
@@ -43,7 +44,8 @@
         },
         data(){
             return {
-                dialogVisible: false
+                dialogVisible: false,
+                modalset:false
             }
         },
         methods:{
@@ -53,17 +55,23 @@
             handlerLogin(){
                 this.dialogVisible = true;
                  // router.push("login");
-            }
+            },
+
         }
     }
 
 </script>
+<style>
+    .login-dia{
+
+    }
+</style>
 
 <style scoped >
    .boxs{
        height: 42px;
-       background-color: #20a0ff;
-       color:#fff;
+       background-color: #efefef;
+       color:#343c31;
    }
    .col-text{
        display: flex;

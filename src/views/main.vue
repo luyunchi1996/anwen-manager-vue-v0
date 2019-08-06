@@ -2,7 +2,7 @@
     <div class="box">
         <Header class="header"  @handlerMenu="handlermenu"/>
         <div :style="contentStyle" >
-            <h2 class="title">icase360.com</h2>
+            <h2 class="title">&nbsp;</h2>
             <SearchLinks :links="getSearchLinks"  />
             <div class="content" >
                 <LinkPanel   v-for="(link,index) in getGroupLinks"   :link="link" :label="index"  />
@@ -57,9 +57,11 @@
 
         </div>
 
+        <!--<span>邮箱&nbsp;：icase360@163.com</span>-->
         <div class="footer">
-            <p><span>© 苏州法智科技有限公司</span>&nbsp;&nbsp;<span>邮箱&nbsp;：icase360@163.com</span></p>
-            <p><span>苏ICP备17060514号-1</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class="alink" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32050802010594">苏公网安备32050802010594号</a></p>
+
+            <!--<p></p>-->
+            <p><span>© 苏州法智科技有限公司</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>苏ICP备17060514号-1</span>&nbsp;&nbsp;&nbsp;&nbsp;<a class="alink" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32050802010594">苏公网安备32050802010594号</a></p>
         </div>
 
     </div>
@@ -453,17 +455,20 @@
     }
     .footer{
         height: 64px;
-        background-color: #20a0ff;
+        /*background-color: #20a0ff;*/
         width: 100%;
-
+        color: #7f7c7c;
     }
+     .footer a{
+         color: #7f7c7c;
+     }
     .footer p{
          margin: 0;
-         color: white;
+
          font-size: 14px;
         text-align: center;
         padding: 3px 0;
         position: relative;
-        top: 8px;
+        top: 20px;
     }
 </style>

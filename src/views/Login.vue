@@ -161,6 +161,12 @@ export default {
   }
 };
 </script>
+<style>
+  .v-modal{
+    z-index: 0 !important;
+  }
+</style>
+
 <style lang="less">
   .wxlogin-dialog{
      .el-dialog__header{

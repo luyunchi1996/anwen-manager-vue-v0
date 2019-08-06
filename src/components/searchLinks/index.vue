@@ -68,8 +68,10 @@
         border-radius: 0;
     }
     .input-with-select{
-         width: 30%;
+         width: 580px;
     }
+
+    /*#7fdc74*/
     .el-input-group__append{
          border: 0;
         background-color: white;
