@@ -6,8 +6,8 @@
             </el-col>
             <el-col :span="6" class="col-menu">
                 <div  class="col-link" @click="handlerMenu" >智能助手</div><br/>
-                <div  class="col-last col-link" @click="handlerLogin">登录</div>
-                <!--<div  class="col-last col-link" @click="SetHome(this,window.location)">设为主页</div>-->
+                <div  class="col-link" @click="handlerLogin">登录</div>
+                <div  class="col-last col-link" @click="setHome">设为主页</div>
             </el-col>
         </el-row>
 
@@ -56,6 +56,9 @@
                 this.dialogVisible = true;
                  // router.push("login");
             },
+            setHome(){
+                 window.open("http://icase360.com/help/")
+            }
 
         }
     }
