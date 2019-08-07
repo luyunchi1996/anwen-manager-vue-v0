@@ -7,7 +7,7 @@
             <el-col :span="6" class="col-menu">
                 <div  class="col-link" @click="handlerMenu" >智能助手</div><br/>
                 <div  class="col-link" @click="handlerLogin">登录</div>
-                <div  class="col-last col-link" @click="setHome">设为主页</div>
+                <div  class="col-last col-link" ><a @click="setHome($event)">设为主页</a></div>
             </el-col>
         </el-row>
 
@@ -56,7 +56,25 @@
                 this.dialogVisible = true;
                  // router.push("login");
             },
-            setHome(){
+            setHome(e){
+                let a = e.currentTarget;
+                let homePage='wwww.baidu.com';
+                try {
+                    debugger
+                    a.style.behavior = 'url(#default#homepage)';
+                    a.setHomePage(homePage);
+                } catch (e) {
+                    if (window.netscape) {
+                        try {
+                            netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+                        } catch (e) {
+                            alert("此操作被浏览器拒绝！\n请在浏览器地址栏输入“about:config”并回车\n然后将 [signed.applets.codebase_principal_support]的值设置为'true',双击即可。");
+                        }
+                        var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
+                        prefs.setCharPref('browser.startup.homepage', homePage);
+                    }
+                    alert("无法设置为主页")
+                }
                  window.open("http://icase360.com/help/")
             }
 

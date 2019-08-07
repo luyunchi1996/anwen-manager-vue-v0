@@ -2,8 +2,8 @@
     <div class="box">
         <Header class="header"  @handlerMenu="handlermenu"/>
         <div :style="contentStyle" >
-            <h2 class="title">&nbsp;</h2>
-            <SearchLinks :links="getSearchLinks"  />
+            <!--<h2 class="title">&nbsp;</h2>-->
+            <SearchLinks class="title" :links="getSearchLinks"  />
             <div class="content" >
                 <LinkPanel   v-for="(link,index) in getGroupLinks"   :link="link" :label="index"  />
             </div>
