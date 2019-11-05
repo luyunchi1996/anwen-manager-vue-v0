@@ -18,15 +18,6 @@
                    :visible.sync="dialogVisible"  :show-close="false"
                    class="login-dia wxlogin-dialog">
                 <Login />
-            <!--<wxlogin :appid ="wxLoginInfo.appid" class="wxLogin"-->
-                     <!--:scope="wxLoginInfo.scope"-->
-                     <!--:redirect_uri="wxLoginInfo.redirect_uri"-->
-                     <!--:state	=" wxLoginInfo.state">-->
-
-            <!--</wxlogin>-->
-            <!--<el-col :span="8"><label for="">手机号：</label><input type="text" v-model="tellPhone"></el-col>-->
-            <!--<span slot="footer" class="dialog-footer">-->
-            <!--<el-button type="primary" @click="login">确 定</el-button>-->
             <!--</span>-->
         </el-dialog>
     </div>
@@ -74,8 +65,9 @@
                         prefs.setCharPref('browser.startup.homepage', homePage);
                     }
                     alert("无法设置为主页")
+                    window.open("http://icase360.com/help/")
                 }
-                 window.open("http://icase360.com/help/")
+
             }
 
         }
