@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="row">
-            <div  class="col-label">{{label}}</div>
+        <div class="row" :class="label?'':'no-label'">
+            <div  class="col-label" v-if="label">{{label}}</div>
             <div  class="col-content">
-                <a v-for="(li,index) in link"  @click="handlerClick(li.href)" > <img  class="icon"  @error="handleImgError($event,index)" :src="li.icon" />{{li.name}}</a>
+                <a v-for="(li,index) in link" :key="index"  @click="handlerClick(li.href)" > <img  class="icon"  @error="handleImgError($event,index)" :src="li.icon" />{{li.name}}</a>
             </div>
         </div>
 
@@ -42,7 +42,6 @@
               var ctx = canvas.getContext("2d");
               ctx.drawImage(img, 0, 0, 18, 18);
               var dataURL = canvas.toDataURL("image/png");
-              debugger
               return dataURL
                // return dataURL.replace("data:image/png;base64,", "");
            },
@@ -59,10 +58,18 @@
         width: 990px;
 
     }
+    .no-label{
+         padding: 6px 40px;
+    }
+    .no-label .col-content a{
+         padding: 0;
+         padding-right: 12px;
+    }
     .icon{
         width: 18px;
         height: 18px;
         padding-right: 6px;
+
     }
     .col-content{
          display: flex;

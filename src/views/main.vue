@@ -5,7 +5,8 @@
             <!--<h2 class="title">&nbsp;</h2>-->
             <SearchLinks class="title" :links="getSearchLinks"  />
             <div class="content" >
-                <LinkPanel   v-for="(link,index) in getGroupLinks"   :link="link" :label="index"  />
+                <LinkPanel :link="getTopLinks"/>
+                <LinkPanel   v-for="(link,index) in getGroupLinks"   :key="index" :link="link" :label="index"  />
             </div>
         </div>
         <div class="warps" v-if="changebtn" :style="newContentStyle">
@@ -74,13 +75,19 @@
     import  SearchLinks from  "../components/searchLinks/index"
     import  LinkPanel from  "../components/LinkPanel/index"
 
-
+    const linkTop =[
+         {
+               name:"大象刑辩",
+                href:"http://dxxb.icase360.com",
+                icon:"http://dxxb.icase360.com/favicon.ico"
+         }
+    ]
     const links={
         "司法数据":[
             {
                 name:"裁判文书网",
                 href:"http://wenshu.court.gov.cn/",
-                icon:"http://wenshu.court.gov.cn/favicon.ico"
+                icon:"http://wenshu.court.gov.cn/website/wenshu/images/favicon.ico"
             },
             {
                 name:"检察案件信息",
@@ -176,7 +183,7 @@
             {
                 name:"失信查询",
                 href:"http://shixin.court.gov.cn/",
-                icon:"http://shixin.court.gov.cn/favicon.ico"
+                icon:"http://www.ajxxgk.jcy.gov.cn/favicon.ico"
             },
             {
                 name:"司法拍卖",
@@ -298,7 +305,11 @@
             },
             getGroupLinks(){
                  return links
+            },
+            getTopLinks(){
+                return linkTop
             }
+
         },
         mounted(){
             let that = this

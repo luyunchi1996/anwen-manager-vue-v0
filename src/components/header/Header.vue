@@ -10,7 +10,6 @@
                 <div  class="col-last col-link" ><a @click="setHome($event)">设为主页</a></div>
             </el-col>
         </el-row>
-
         <el-dialog
                    title=""
                    width="360px"
@@ -49,21 +48,11 @@
             },
             setHome(e){
                 let a = e.currentTarget;
-                let homePage='wwww.baidu.com';
+                let homePage='wwww.icase360.com';
                 try {
-                    debugger
                     a.style.behavior = 'url(#default#homepage)';
                     a.setHomePage(homePage);
                 } catch (e) {
-                    if (window.netscape) {
-                        try {
-                            netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
-                        } catch (e) {
-                            alert("此操作被浏览器拒绝！\n请在浏览器地址栏输入“about:config”并回车\n然后将 [signed.applets.codebase_principal_support]的值设置为'true',双击即可。");
-                        }
-                        var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
-                        prefs.setCharPref('browser.startup.homepage', homePage);
-                    }
                     alert("无法设置为主页")
                     window.open("http://icase360.com/help/")
                 }
